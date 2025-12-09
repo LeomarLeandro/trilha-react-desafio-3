@@ -1,22 +1,28 @@
-import React from 'react'
+import React from "react";
 import { Controller } from "react-hook-form";
+import { InputContainer, InputText, IconContainer } from "./styles";
 
-import {InputContainer, InputText, IconContainer } from './styles';
+import { FaUser, FaEnvelope, FaLock } from "react-icons/fa";
 
-const Input = ({leftIcon, name, control, ...rest}) => {
+const icons = {
+  user: <FaUser />,
+  email: <FaEnvelope />,
+  lock: <FaLock />
+};
 
-
+const Input = ({ leftIcon, name, control, rules, ...rest }) => {
   return (
     <InputContainer>
-        {leftIcon ? (<IconContainer>{leftIcon}</IconContainer>) : null}
-        <Controller
+      {leftIcon && <IconContainer>{icons[leftIcon]}</IconContainer>}
+
+      <Controller
         name={name}
         control={control}
-        render={({ field }) =>  <InputText {...field} {...rest} />}
+        rules={rules}
+        render={({ field }) => <InputText {...field} {...rest} />}
       />
-       
     </InputContainer>
-  )
-}
+  );
+};
 
-export { Input }; 
+export { Input };
